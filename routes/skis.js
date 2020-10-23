@@ -1,5 +1,3 @@
-// Save test
-
 const router = require('express').Router()
 let Ski = require('../models/ski')
 
@@ -24,8 +22,8 @@ const removeEmpty = obj =>
           : { ...newObj, [k]: obj[k] }, // Copy value.
       {}
     );
-    let terrVal = Object.values(removeEmpty(payload.terrain))
-        console.log(terrVal)
+    // let terrVal = Object.values(removeEmpty(payload.terrain))
+    //     console.log(terrVal)
     let genVal = Object.values(removeEmpty(payload.gender))
         console.log(genVal)
     let skillVal = Object.values(removeEmpty(payload.skillLevel))
@@ -39,7 +37,7 @@ const removeEmpty = obj =>
 
     Ski.find(
         {
-        terrain: {$in: terrVal},
+        // terrain: {$in: terrVal},
         gender: {$in: genVal},
         skillLevel: {$in: skillVal},
         speed: {$in: speedVal},
