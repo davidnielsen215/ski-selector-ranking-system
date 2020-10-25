@@ -51,8 +51,13 @@ export default class Result extends Component {
     }
 
     retrieveSki = () => {
-        Axios.post('https://ski-selector.herokuapp.com/skis/find', this.state.inputValues).then(res => {  
+        Axios.post('http://localhost:5000/skis/find', this.state.inputValues).then(res => {  
             console.log(res.data)
+            if (res.data.length === 0){
+                this.setState({
+                    isEmpty : true
+                })
+            }
             if(res.data[0] !== undefined){
                 this.setState({
                     skiResults: {
@@ -99,12 +104,6 @@ export default class Result extends Component {
                         ...this.state.skiResults,
                         result6: res.data[5].name
                     }
-                })
-            } 
-            if( res.data[0] === undefined && res.data[1] === undefined && res.data[2] === undefined && res.data[3] === undefined 
-                && res.data[4] === undefined && res.data[5] === undefined){
-                this.setState({
-                    isEmpty: true
                 })
             } 
             })
