@@ -53,11 +53,80 @@ export default class Result extends Component {
     retrieveSki = () => {
         Axios.post('http://localhost:5000/skis/find', this.state.inputValues).then(res => {  
             console.log(res.data)
+
+             const removeEmpty = obj =>
+            Object.keys(obj)
+            .filter(k => obj[k] != null) // Remove undef. and null.
+            .reduce(
+                (newObj, k) =>
+                typeof obj[k] === "object"
+                ? { ...newObj, [k]: removeEmpty(obj[k]) } // Recurse.
+                : { ...newObj, [k]: obj[k] }, // Copy value.
+                {}
+                );
+                
+                let terVals = this.state.inputValues.terrain;
+                let onlyVals = removeEmpty(terVals);
+                let onlyLetters = [];
+                
+                
+                if(onlyVals.p !== undefined){
+                    onlyLetters.push(onlyVals.p)
+                }
+                if(onlyVals.m !== undefined){
+                    onlyLetters.push(onlyVals.m)
+                }
+                if(onlyVals.t !== undefined){
+                    onlyLetters.push(onlyVals.t)
+                }
+                if(onlyVals.g !== undefined){
+                    onlyLetters.push(onlyVals.g)
+                }
+                if(onlyVals.b !== undefined){
+                    onlyLetters.push(onlyVals.b)
+                }
+                
+                console.log(onlyVals)
+                console.log(onlyLetters)
+
+                //Since we already have a value that contains all the entries from state of which to add the res.data, implement way to 
+                //add the values of the response together and then concat the values onto the res.data within a new property
+                
+                res.data.map(ski => {
+
+                    let first = ski.tRank[onlyLetters[0]];
+                    let second = 0;
+                    let third = 0;
+                    let fourth = 0;
+                    let fifth = 0;
+                    if(ski.tRank[onlyLetters[1]]){
+                         second = ski.tRank[onlyLetters[1]];
+                    }else second = 0
+                    if(ski.tRank[onlyLetters[2]]){
+                     third = ski.tRank[onlyLetters[2]];
+                    }else third = 0
+                    if(ski.tRank[onlyLetters[3]]){
+                         fourth = ski.tRank[onlyLetters[3]];
+                    }else fourth = 0
+                    if(ski.tRank[onlyLetters[4]]){
+                         fifth = ski.tRank[onlyLetters[4]];
+                    }else fifth = 0
+                    
+
+                    ski.addition = parseInt(first) + parseInt(second) + parseInt(third) + parseInt(fourth) + parseInt(fifth)
+                })
+                
+                res.data.sort((a,b) => {     
+                    return b.addition - a.addition
+                });
+                console.log(res.data)
+            
             if (res.data.length === 0){
                 this.setState({
                     isEmpty : true
                 })
             }
+
             if(res.data[0] !== undefined){
                 this.setState({
                     skiResults: {
@@ -141,9 +210,7 @@ export default class Result extends Component {
         <div style={styles.background}>
             <div>
             <h1 style={styles.textColor}>Recommended Skis</h1>
-            {/* <div style={{paddingLeft: '50%', paddingTop: '5%'}}>
-            <Loading/>
-            </div> */}
+            
             <br/>
                 {emptiness}
                 {loading}
