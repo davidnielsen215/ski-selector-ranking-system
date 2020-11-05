@@ -94,11 +94,14 @@ export default class Result extends Component {
                 
                 res.data.map(ski => {
 
-                    let first = ski.tRank[onlyLetters[0]];
+                    let first = 0;
                     let second = 0;
                     let third = 0;
                     let fourth = 0;
                     let fifth = 0;
+                    if(ski.tRank[onlyLetters[0]]){
+                        first = ski.tRank[onlyLetters[0]];
+                    }else first = 0
                     if(ski.tRank[onlyLetters[1]]){
                          second = ski.tRank[onlyLetters[1]];
                     }else second = 0
