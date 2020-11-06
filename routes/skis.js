@@ -64,6 +64,7 @@ router.route('/add').post((req, res) => {
     const speed = req.body.speed
     const turnRadius = req.body.turnRadius
     const snow = req.body.snow
+    const tRank = req.body.tRank
 
     const newSki = new Ski({
         name, 
@@ -72,7 +73,8 @@ router.route('/add').post((req, res) => {
         skillLevel, 
         speed, 
         turnRadius, 
-        snow
+        snow,
+        tRank
     })
 
     newSki.save()

@@ -225,7 +225,6 @@ export class UserForm extends Component {
                 
         switch (step) {
             default:
-                
             case 1: 
                 return(
                     <LandingPage

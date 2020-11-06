@@ -7,12 +7,24 @@ export default class Result extends Component {
     
     state = {
             skiResults :{
-                result1: undefined,
-                result2: undefined,
-                result3: undefined,
-                result4: undefined,
-                result5: undefined,
-                result6: undefined
+                result1: {  name: undefined,
+                            rank: ""
+                },
+                result2: {  name: undefined,
+                            rank: ""
+                },
+                result3: {  name: undefined,
+                            rank: ""
+                },
+                result4: {  name: undefined,
+                            rank: ""
+                },
+                result5: {  name: undefined,
+                            rank: ""
+                },
+                result6: {  name: undefined,
+                            rank: ""
+                }
             },
             inputValues: {
                 terrain: {
@@ -134,7 +146,10 @@ export default class Result extends Component {
                 this.setState({
                     skiResults: {
                         ...this.state.skiResults,
-                        result1: res.data[0].name
+                        result1: {
+                                    name: res.data[0].name,
+                                    rank: res.data[0].addition
+                                } 
                     }
                 })
             }
@@ -142,7 +157,10 @@ export default class Result extends Component {
                 this.setState({
                     skiResults: {
                         ...this.state.skiResults,
-                        result2: res.data[1].name
+                        result2: {
+                            name: res.data[1].name,
+                            rank: res.data[1].addition
+                        } 
                     }
                 })
             }
@@ -150,7 +168,10 @@ export default class Result extends Component {
                 this.setState({
                     skiResults: {
                         ...this.state.skiResults,
-                        result3: res.data[2].name
+                        result3: {
+                            name: res.data[2].name,
+                            rank: res.data[2].addition
+                        } 
                     }
                 })
             }
@@ -158,7 +179,10 @@ export default class Result extends Component {
                 this.setState({
                     skiResults: {
                         ...this.state.skiResults,
-                        result4: res.data[3].name
+                        result4: {
+                            name: res.data[3].name,
+                            rank: res.data[3].addition
+                        } 
                     }
                 })
             }
@@ -166,7 +190,10 @@ export default class Result extends Component {
                 this.setState({
                     skiResults: {
                         ...this.state.skiResults,
-                        result5: res.data[4].name
+                        result5: {
+                            name: res.data[4].name,
+                            rank: res.data[4].addition
+                        } 
                     }
                 })
             }   
@@ -174,7 +201,10 @@ export default class Result extends Component {
                 this.setState({
                     skiResults: {
                         ...this.state.skiResults,
-                        result6: res.data[5].name
+                        result6: {
+                            name: res.data[5].name,
+                            rank: res.data[5].addition
+                        } 
                     }
                 })
             } 
@@ -197,12 +227,12 @@ export default class Result extends Component {
         let skis = this.state.skiResults
         let emptiness 
         let loading
-        if(skis.result1 === undefined){
+        if(skis.result1.name === undefined){
             loading =   <div style={{paddingLeft: '50%', paddingTop: '5%'}}>
                             <Loading/>
                         </div>
         }
-        if(skis.result1 !== undefined){
+        if(skis.result1.name !== undefined){
             loading = false
         }
         if(this.state.isEmpty === true){
@@ -220,7 +250,7 @@ export default class Result extends Component {
             <br/>
             <div style={styles.cardContainer}>
             {Object.keys(skis).map(function(item, i){
-                if(skis[item] !== undefined){
+                if(skis[item].name !== undefined){
                     return <SkiResult key={i} skis={skis} item={item} cardStyle={styles.card}/>
                 }
                 

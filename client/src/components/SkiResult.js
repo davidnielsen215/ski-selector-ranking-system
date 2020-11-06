@@ -9,8 +9,11 @@ export default class SkiResult  extends Component {
             <Card style={this.props.cardStyle}>
                 <img src={ImgUrl} alt='' style={{width: '230px', height: 'auto'}}/>
                 <CardContent>
-                    <Typography gutterBottom variant="h5" component="h2">
-                    {this.props.skis[this.props.item]}
+                    <Typography gutterBottom variant="h5" component="h1">
+                        {this.props.skis[this.props.item].name}
+                    </Typography>
+                    <Typography gutterBottom variant="h7" component="h4">
+                       terrain score: {this.props.skis[this.props.item].rank}
                     </Typography>
                 </CardContent>
             </Card>

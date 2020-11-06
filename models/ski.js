@@ -4,20 +4,20 @@ const Schema = mongoose.Schema;
 
 const skiSchema = new Schema({
     name: {
-        type: Array,
+        type: String,
         required: true,
         unique: true,
     },
-    // terrain: {
-    //     type: Array,
-    //     required: true
-    // },
-    gender : {
+    terrain: {
         type: Array,
         required: true
     },
+    gender : {
+        type: String,
+        required: true
+    },
     skillLevel: {
-        type: Array,
+        type: String,
         required: true
     },
     speed: {
@@ -29,10 +29,12 @@ const skiSchema = new Schema({
         required: true
     },
     snow: {
-        type: Array,
+        type: String,
         required: true
-    }
-    
+    },
+    tRank: { 
+        type: Object
+    } 
 })
 
 const Ski = mongoose.model('Ski', skiSchema);
